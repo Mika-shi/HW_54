@@ -51,7 +51,7 @@ public class TodoController : Controller
             : TodoSortState.TitleAscending;
         ViewBag.PrioritySort = sortOrder == TodoSortState.PriorityAscending
             ? TodoSortState.PriorityDescending
-            : TodoSortState.StateAscending;
+            : TodoSortState.PriorityAscending;
         ViewBag.StateSort = sortOrder == TodoSortState.StateAscending
             ? TodoSortState.StateDescending
             : TodoSortState.CreatedOnDescending;
@@ -61,8 +61,13 @@ public class TodoController : Controller
             TodoSortState.TitleAscending => tasks.OrderBy(t => t.Title),
             TodoSortState.TitleDescending => tasks.OrderByDescending(t => t.Title),
 
-            TodoSortState.PriorityAscending => tasks.OrderBy(t => t.Priority),
-            TodoSortState.PriorityDescending => tasks.OrderByDescending(t => t.Priority),
+            TodoSortState.PriorityAscending => tasks.OrderBy(t =>
+                t.Priority == TaskPriority.High ? 1 :
+                t.Priority == TaskPriority.Normal ? 2 : 3),
+
+            TodoSortState.PriorityDescending => tasks.OrderByDescending(t =>
+                t.Priority == TaskPriority.High ? 1 :
+                t.Priority == TaskPriority.Normal ? 2 : 3),
 
             TodoSortState.StateAscending => tasks.OrderBy(t => t.State),
             TodoSortState.StateDescending => tasks.OrderByDescending(t => t.State),

@@ -118,18 +118,18 @@ else
 
             <th>
                 <a asp-action="Index"
-                   asp-route-sortOrder="@ViewBag.CreatedOnSort"
+                   asp-route-sortOrder="@ViewBag.PrioritySort"
                    asp-route-title="@ViewBag.FilterTitle"
                    asp-route-createdFrom="@ViewBag.CreatedFrom"
                    asp-route-createdTo="@ViewBag.CreatedTo"
                    asp-route-descriptionWords="@ViewBag.DescriptionWords"
                    asp-route-priority="@ViewBag.Priority"
                    asp-route-state="@ViewBag.State">
-                    Created on
+                    Priority
                 </a>
             </th>
 
-            <th>Executor</th>
+            <th>Responsable</th>
             <th>Actions</th>
         </tr>
         </thead>
