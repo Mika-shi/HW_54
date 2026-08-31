@@ -75,14 +75,29 @@ public class TodoController : Controller
         
         int count = tasks.Count();
 
-        List<ToDoTask> items = tasks.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+        if (page < 1)
+        {
+            page = 1;
+        }
+
+        int totalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+        if (totalPages > 0 && page > totalPages)
+        {
+            page = totalPages;
+        }
+
+        List<ToDoTask> items = tasks
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToList();
 
         ToDoIndexViewModel viewModel = new ToDoIndexViewModel()
         {
             Tasks = items,
             PageViewModel = new PageViewModel(count, page, pageSize)
         };
-        ViewBag.Title = title;
+        ViewBag.FilterTitle = title;
         ViewBag.CreatedFrom = createdFrom?.ToString("dd-MMM-yyyy");
         ViewBag.CreatedTo = createdTo?.ToString("dd-MMM-yyyy");
         ViewBag.DesciptionWords = descriptionWords;

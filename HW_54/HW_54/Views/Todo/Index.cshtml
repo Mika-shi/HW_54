@@ -23,7 +23,7 @@
 <form asp-action="Index" asp-controller="Todo" method="get" class="row g-3">
     <div class="col-md-4">
         <label>Title</label>
-        <input type="text" name="title" value="@ViewBag.Title" class="form-control" />
+        <input type="text" name="title" value="@ViewBag.FilterTitle" placeholder="Enter the title of the task" class="form-control" />
     </div>
 
     <div class="col-md-4">
@@ -37,8 +37,8 @@
     </div>
 
     <div class="col-md-4">
-        <label>Description contains</label>
-        <input type="text" name="descriptionWords" value="@ViewBag.DescriptionWords" class="form-control" />
+        <label>Description</label>
+        <input type="text" name="descriptionWords" value="@ViewBag.DescriptionWords" placeholder="Enter words from description" class="form-control" />
     </div>
 
     <div class="col-md-4">
@@ -80,7 +80,7 @@ else
             <th>
                 <a asp-action="Index"
                    asp-route-sortOrder="@ViewBag.TitleSort"
-                   asp-route-title="@ViewBag.Title"
+                   asp-route-title="@ViewBag.FilterTitle"
                    asp-route-createdFrom="@ViewBag.CreatedFrom"
                    asp-route-createdTo="@ViewBag.CreatedTo"
                    asp-route-descriptionWords="@ViewBag.DescriptionWords"
@@ -93,7 +93,7 @@ else
             <th>
                 <a asp-action="Index"
                    asp-route-sortOrder="@ViewBag.PrioritySort"
-                   asp-route-title="@ViewBag.Title"
+                   asp-route-title="@ViewBag.FilterTitle"
                    asp-route-createdFrom="@ViewBag.CreatedFrom"
                    asp-route-createdTo="@ViewBag.CreatedTo"
                    asp-route-descriptionWords="@ViewBag.DescriptionWords"
@@ -106,7 +106,7 @@ else
             <th>
                 <a asp-action="Index"
                    asp-route-sortOrder="@ViewBag.StateSort"
-                   asp-route-title="@ViewBag.Title"
+                   asp-route-title="@ViewBag.FilterTitle"
                    asp-route-createdFrom="@ViewBag.CreatedFrom"
                    asp-route-createdTo="@ViewBag.CreatedTo"
                    asp-route-descriptionWords="@ViewBag.DescriptionWords"
@@ -119,7 +119,7 @@ else
             <th>
                 <a asp-action="Index"
                    asp-route-sortOrder="@ViewBag.CreatedOnSort"
-                   asp-route-title="@ViewBag.Title"
+                   asp-route-title="@ViewBag.FilterTitle"
                    asp-route-createdFrom="@ViewBag.CreatedFrom"
                    asp-route-createdTo="@ViewBag.CreatedTo"
                    asp-route-descriptionWords="@ViewBag.DescriptionWords"
@@ -193,40 +193,45 @@ else
 
 <br />
 
-<div>
-    @if (Model.PageViewModel.HasPreviousPage)
-    {
-        <a asp-action="Index"
-           asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
-           asp-route-sortOrder="@ViewBag.SortOrder"
-           asp-route-title="@ViewBag.Title"
-           asp-route-createdFrom="@ViewBag.CreatedFrom"
-           asp-route-createdTo="@ViewBag.CreatedTo"
-           asp-route-descriptionWords="@ViewBag.DescriptionWords"
-           asp-route-priority="@ViewBag.Priority"
-           asp-route-state="@ViewBag.State"
-           class="btn btn-outline-primary">
-            Previous
-        </a>
-    }
+@if (Model.Tasks.Count > 0)
+{
+    <br />
 
-    <span class="mx-2">
-        Page @Model.PageViewModel.PageNumber of @Model.PageViewModel.TotalPages
-    </span>
+    <div>
+        @if (Model.PageViewModel.HasPreviousPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+               asp-route-sortOrder="@ViewBag.SortOrder"
+               asp-route-title="@ViewBag.FilterTitle"
+               asp-route-createdFrom="@ViewBag.CreatedFrom"
+               asp-route-createdTo="@ViewBag.CreatedTo"
+               asp-route-descriptionWords="@ViewBag.DescriptionWords"
+               asp-route-priority="@ViewBag.Priority"
+               asp-route-state="@ViewBag.State"
+               class="btn btn-outline-primary">
+                Previous
+            </a>
+        }
 
-    @if (Model.PageViewModel.HasNextPage)
-    {
-        <a asp-action="Index"
-           asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
-           asp-route-sortOrder="@ViewBag.SortOrder"
-           asp-route-title="@ViewBag.Title"
-           asp-route-createdFrom="@ViewBag.CreatedFrom"
-           asp-route-createdTo="@ViewBag.CreatedTo"
-           asp-route-descriptionWords="@ViewBag.DescriptionWords"
-           asp-route-priority="@ViewBag.Priority"
-           asp-route-state="@ViewBag.State"
-           class="btn btn-outline-primary">
-            Next
-        </a>
-    }
-</div>
+        <span class="mx-2">
+            Page @Model.PageViewModel.PageNumber of @Model.PageViewModel.TotalPages
+        </span>
+
+        @if (Model.PageViewModel.HasNextPage)
+        {
+            <a asp-action="Index"
+               asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+               asp-route-sortOrder="@ViewBag.SortOrder"
+               asp-route-title="@ViewBag.FilterTitle"
+               asp-route-createdFrom="@ViewBag.CreatedFrom"
+               asp-route-createdTo="@ViewBag.CreatedTo"
+               asp-route-descriptionWords="@ViewBag.DescriptionWords"
+               asp-route-priority="@ViewBag.Priority"
+               asp-route-state="@ViewBag.State"
+               class="btn btn-outline-primary">
+                Next
+            </a>
+        }
+    </div>
+}
