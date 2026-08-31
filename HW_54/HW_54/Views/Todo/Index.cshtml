@@ -142,7 +142,7 @@ else
                 <td>@task.Priority</td>
                 <td>@task.State</td>
                 <td>@task.CreatedOn.ToString("dd.MM.yyyy HH:mm")</td>
-                <td>@task.ExecutorName</td>
+                <td>@task.ResponsableName</td>
                 <td>
                     <a asp-action="Details" asp-controller="Todo" asp-route-id="@task.Id" class="btn btn-outline-primary btn-sm">
                         Details

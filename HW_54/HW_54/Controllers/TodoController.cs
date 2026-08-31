@@ -147,6 +147,18 @@ public class TodoController : Controller
 
         return RedirectToAction("Index");
     }
+    
+    public IActionResult Details(int id)
+    {
+        ToDoTask? task = _context.Tasks.FirstOrDefault(t => t.Id == id);
+
+        if (task == null)
+        {
+            return NotFound();
+        }
+
+        return View(task);
+    }
 
     public IActionResult Close(int id)
     {
