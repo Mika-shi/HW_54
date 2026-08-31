@@ -1,15 +1,15 @@
 ﻿namespace HW_54.Models;
 
-public enum ToDoSortState
+public enum TodoSortState
 {
-    TitileAscending,
-    TitileDescending,
+    TitleAscending,
+    TitleDescending,
     
     PriorityAscending,
     PriorityDescending,
     
-    StatusAscending,
-    StatusDescending,
+    StateAscending,
+    StateDescending,
     
     CreatedOnAscending,
     CreatedOnDescending,
